@@ -1,0 +1,24 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          # Repositorio de configuracion (carpeta config-repo dentro de este modulo)
+          search-locations: classpath:/config-repo
+  security:
+    user:
+      name: config
+      password: config123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

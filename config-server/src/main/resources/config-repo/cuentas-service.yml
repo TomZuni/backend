@@ -1,0 +1,46 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:cuentas;DB_CLOSE_DELAY=-1
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+banco:
+  migracion:
+    semana: semana_3
+  # Tasas de interes ANUALES por tipo de cuenta (configurables desde el Config Server)
+  tasas:
+    ahorro: 0.02
+    prestamo: 0.12
+    hipoteca: 0.08
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      resumen:
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 6
+        minimum-number-of-calls: 3
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 15s
+        permitted-number-of-calls-in-half-open-state: 2
+        automatic-transition-from-open-to-half-open-enabled: true
+        register-health-indicator: true
+  retry:
+    instances:
+      resumen:
+        max-attempts: 3
+        wait-duration: 300ms
+        ignore-exceptions:
+          - io.github.resilience4j.circuitbreaker.CallNotPermittedException
+          - io.github.resilience4j.ratelimiter.RequestNotPermitted
+  ratelimiter:
+    instances:
+      resumen:
+        limit-for-period: 20
+        limit-refresh-period: 10s
+        timeout-duration: 0

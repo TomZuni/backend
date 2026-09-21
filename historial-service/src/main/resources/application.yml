@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: historial-service
+  config:
+    import: "configserver:http://localhost:8888"
+  cloud:
+    config:
+      username: config
+      password: config123

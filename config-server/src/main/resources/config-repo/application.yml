@@ -1,0 +1,29 @@
+# =====================================================================
+# Configuracion COMPARTIDA por todos los microservicios (application.yml)
+# NOTA: el secreto JWT esta en claro solo por ser un proyecto academico.
+#       En produccion usar {cipher} de Config Server, Vault o variables de entorno.
+# =====================================================================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka123@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+security:
+  jwt:
+    secret: banco-xyz-clave-secreta-para-firmar-jwt-hs256-2026
+    expiration-seconds: 1800
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers,circuitbreakerevents,retries,retryevents,ratelimiters
+  endpoint:
+    health:
+      show-details: when_authorized
+      roles: ADMIN
+  health:
+    circuitbreakers:
+      enabled: true

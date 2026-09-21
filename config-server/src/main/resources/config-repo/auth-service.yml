@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+# Proteccion contra fuerza bruta en /auth/login (patron RateLimiter)
+resilience4j:
+  ratelimiter:
+    instances:
+      login:
+        limit-for-period: 10
+        limit-refresh-period: 1m
+        timeout-duration: 0
