@@ -47,7 +47,7 @@ banco-xyz-microservicios/
 ├── transacciones-service/        # domain/ migracion/ service/ web/ resilience/ config/
 ├── cuentas-service/              # idem + InteresService y TasasProperties
 ├── historial-service/            # idem + client/ (Feign) y TitularGateway
-├── scripts/                      # levantar-todo.sh, probar-api.sh, detener-todo.sh, validar_migracion.py
+
 
 ```
 
@@ -64,12 +64,12 @@ Cada servicio de datos sigue la misma organización: `domain` (entidad JPA + rep
 
 
 ```bash
-mvn spring-boot:run     # 1º
-mvn -pl eureka-server         spring-boot:run     # 2º
-mvn -pl auth-service          spring-boot:run
-mvn -pl transacciones-service spring-boot:run
-mvn -pl cuentas-service       spring-boot:run
-mvn -pl historial-service     spring-boot:run
+config-server       		   mvn spring-boot:run     # 1º
+eureka-server       		   mvn spring-boot:run     # 2º
+auth-service               	   mvn spring-boot:run
+transacciones-service  	   mvn spring-boot:run
+cuentas-service      		   mvn spring-boot:run
+historial-service    		   mvn spring-boot:run
 ```
 
 Verificación rápida: abrir <http://localhost:8761> (usuario `eureka`, clave `eureka123`) y comprobar que aparecen los 4 microservicios.
