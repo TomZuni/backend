@@ -62,15 +62,6 @@ Cada servicio de datos sigue la misma organización: `domain` (entidad JPA + rep
 
 ## 5. Cómo ejecutar
 
-**Opción A – automática** (Linux / macOS / Git Bash):
-
-```bash
-scripts/levantar-todo.sh      # compila y levanta los 6 módulos en orden
-scripts/probar-api.sh         # ejecuta la demostración completa y guarda evidencia/salida-consola.txt
-scripts/detener-todo.sh
-```
-
-**Opción B – manual** (una terminal por módulo, **respetando este orden**):
 
 ```bash
 mvn spring-boot:run     # 1º
